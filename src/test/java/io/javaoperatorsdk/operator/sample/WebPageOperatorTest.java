@@ -28,8 +28,9 @@ import java.net.http.HttpResponse;
 import java.time.Duration;
 import java.util.ArrayList;
 
-import static io.javaoperatorsdk.operator.sample.Utils.deploymentName;
-import static io.javaoperatorsdk.operator.sample.Utils.serviceName;
+import static io.javaoperatorsdk.operator.sample.dependentresource.ConfigMapDependentResource.configMapName;
+import static io.javaoperatorsdk.operator.sample.dependentresource.DeploymentDependentResource.deploymentName;
+import static io.javaoperatorsdk.operator.sample.dependentresource.ServiceDependentResource.serviceName;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.awaitility.Awaitility.await;
 
@@ -103,7 +104,7 @@ public class WebPageOperatorTest {
         await().atMost(Duration.ofSeconds(LONG_WAIT_SECONDS))
                 .pollInterval(POLL_INTERVAL)
                 .untilAsserted(() -> {
-                    String page = operator.get(ConfigMap.class, Utils.configMapName(webPage)).getData()
+                    String page = operator.get(ConfigMap.class, configMapName(webPage)).getData()
                             .get("index.html");
                     // not using portforward here since there were issues with GitHub actions
                     // String page = httpGetForWebPage(webPage);

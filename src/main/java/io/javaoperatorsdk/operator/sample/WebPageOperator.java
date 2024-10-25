@@ -15,10 +15,9 @@ public class WebPageOperator {
     private static final Logger log = LoggerFactory.getLogger(WebPageOperator.class);
 
     public static void main(String[] args) throws IOException {
-        log.info("WebServer Operator starting!");
+        log.info("WebPage Operator starting!");
 
-        var client = new KubernetesClientBuilder().build();
-        var operator = new Operator(client, o -> o.withStopOnInformerErrorDuringStartup(false));
+        var operator = new Operator();
         operator.register(new WebPageReconciler());
         operator.start();
 

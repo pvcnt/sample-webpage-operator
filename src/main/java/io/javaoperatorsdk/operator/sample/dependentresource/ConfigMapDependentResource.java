@@ -9,10 +9,14 @@ import io.javaoperatorsdk.operator.sample.customresource.WebPage;
 
 import java.util.Map;
 
-import static io.javaoperatorsdk.operator.sample.Utils.configMapName;
 import static io.javaoperatorsdk.operator.sample.WebPageReconciler.MANAGED_LABEL;
 
 public class ConfigMapDependentResource extends CRUDKubernetesDependentResource<ConfigMap, WebPage> {
+
+    public static String configMapName(WebPage webPage) {
+        return webPage.getMetadata().getName() + "-html";
+    }
+
     public ConfigMapDependentResource() {
         super(ConfigMap.class);
     }
