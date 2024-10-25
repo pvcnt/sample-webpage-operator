@@ -17,7 +17,7 @@ import io.javaoperatorsdk.operator.sample.dependentresource.ServiceDependentReso
 import java.util.Map;
 
 @ControllerConfiguration
-public class WebPageReconciler implements Reconciler<WebPage>, ErrorStatusHandler<WebPage>, Cleaner<WebPage>, EventSourceInitializer<WebPage> {
+public class WebPageReconciler implements Reconciler<WebPage>, ErrorStatusHandler<WebPage>, EventSourceInitializer<WebPage> {
     public static final String MANAGED_LABEL = "webpage-operator.io/managed";
 
     private final KubernetesDependentResource<ConfigMap, WebPage> configMapDR = new ConfigMapDependentResource();
@@ -59,10 +59,5 @@ public class WebPageReconciler implements Reconciler<WebPage>, ErrorStatusHandle
         status.setErrorMessage(null);
         webPage.setStatus(status);
         return UpdateControl.patchStatus(webPage);
-    }
-
-    @Override
-    public DeleteControl cleanup(WebPage webPage, Context<WebPage> context) {
-        return DeleteControl.defaultDelete();
     }
 }
