@@ -6,7 +6,7 @@ spec:
   html: |
     <html>
       <head>
-        <title>Webserver Operator</title>
+        <title>WebPage Operator</title>
       </head>
       <body>
         Hello World!
